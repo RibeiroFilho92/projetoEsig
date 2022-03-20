@@ -9,69 +9,89 @@
 </h:head>
 
 <h:body>
-
-	<h1>Cadastro de atividade</h1>
-
 	<h:form id="formCadastrarAtividade">
 
-		<h:outputText value="ID" />
-		<h:inputText id="campoID" value="#{atividadeBean.atividade.id}"
-			readonly="true" />
-		<br />
+		<h:panelGrid columns="2">
 
-		<h:outputText value="Título" />
-		<h:inputText id="campoTitulo"
-			value="#{atividadeBean.atividade.titulo}" />
-		<br />
+			<f:facet name="header">
+				<h:outputText value="Cadastro de atividade"></h:outputText>
+			</f:facet>
+			<h:outputText value="ID" />
+			<h:inputText id="campoID" value="#{atividadeBean.atividade.id}"
+				readonly="true" />
 
-		<h:outputText value="Descrição" />
-		<h:inputTextarea columns="40" rows="3" id="campoDescricao"
-			value="#{atividadeBean.atividade.descricao}" />
-		<br />
+			<h:outputText value="Título" />
+			<h:inputText id="campoTitulo"
+				value="#{atividadeBean.atividade.titulo}" />
 
-		<h:outputText value="Responsável" />
-		<h:inputText id="campoResponsavel"
-			value="#{atividadeBean.atividade.responsavel}" />
-		<br />
+			<h:outputText value="Descrição" />
+			<h:inputTextarea columns="40" rows="3" id="campoDescricao"
+				value="#{atividadeBean.atividade.descricao}" />
 
-		<h:outputText value="Prioridade" />
-		<h:inputText id="campoPrioridade"
-			value="#{atividadeBean.atividade.prioridade}" />
-		<br />
+			<h:outputText value="Responsável" />
+			<h:inputText id="campoResponsavel"
+				value="#{atividadeBean.atividade.responsavel}" />
 
-		<h:commandButton value="Cadastrar/Atualizar atividade"
-			action="#{atividadeBean.salvar}" />
+			<h:outputText value="Prioridade" />
+			<h:inputText id="campoPrioridade"
+				value="#{atividadeBean.atividade.prioridade}" />
+				
+			<h:outputText value="Deadline" />
+			<h:inputText id="campoDeadline" value="#{atividadeBean.atividade.deadline}">
+				<f:convertDateTime pattern="dd/MM/yyyy"></f:convertDateTime>
+			</h:inputText>
+			
 
-		<h:commandButton value="Limpar campos" action="#{atividadeBean.novo}" />
+			<h:commandButton value="Cadastrar/Atualizar atividade"
+				action="#{atividadeBean.salvar}" />
+
+			<h:commandButton value="Novo registro" action="#{atividadeBean.novo}" />
+
+		</h:panelGrid>
 
 	</h:form>
 
 	<h:form id="formExibirAtividade">
-		<h:dataTable value="#{atividadeBean.atividades}" var="atividade">
+
+		<h:dataTable value="#{atividadeBean.atividades}" var="atividade" cellpadding="3">
+
+			<f:facet name="header">
+				<h:outputText value="Lista de atividades"></h:outputText>
+			</f:facet>
+
 			<h:column>
+				<f:facet name="header">ID</f:facet>
 				<h:outputText value="#{atividade.id}"></h:outputText>
 			</h:column>
 			<h:column>
+				<f:facet name="header">Título</f:facet>
 				<h:outputText value="#{atividade.titulo}"></h:outputText>
 			</h:column>
 			<h:column>
+				<f:facet name="header">Descrição</f:facet>
 				<h:outputText value="#{atividade.descricao}"></h:outputText>
 			</h:column>
 			<h:column>
+				<f:facet name="header">Responsável</f:facet>
 				<h:outputText value="#{atividade.responsavel}"></h:outputText>
 			</h:column>
 			<h:column>
+				<f:facet name="header">Prioridade</f:facet>
 				<h:outputText value="#{atividade.prioridade}"></h:outputText>
 			</h:column>
 			<h:column>
+				<f:facet name="header">Deadline</f:facet>
+				<h:outputText value="#{atividade.deadline}"></h:outputText>
+			</h:column>
+			<h:column>
+				<f:facet name="header">Ação</f:facet>
 				<h:commandLink value="Editar">
 					<f:setPropertyActionListener value="#{atividade}"
 						target="#{atividadeBean.atividade}" />
 				</h:commandLink>
-			</h:column>
-			<h:column>
+				<span></span>
 				<h:commandLink value="Remover" action="#{atividadeBean.remover}">
-				<f:setPropertyActionListener value="#{atividade}"
+					<f:setPropertyActionListener value="#{atividade}"
 						target="#{atividadeBean.atividade}" />
 				</h:commandLink>
 			</h:column>

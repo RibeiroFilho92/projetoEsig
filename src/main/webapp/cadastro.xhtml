@@ -1,0 +1,82 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<h:head>
+	<title>ESIG - Cadastro de atividades</title>
+</h:head>
+
+<h:body>
+
+	<h1>Cadastro de atividade</h1>
+
+	<h:form id="formCadastrarAtividade">
+
+		<h:outputText value="ID" />
+		<h:inputText id="campoID" value="#{atividadeBean.atividade.id}"
+			readonly="true" />
+		<br />
+
+		<h:outputText value="Título" />
+		<h:inputText id="campoTitulo"
+			value="#{atividadeBean.atividade.titulo}" />
+		<br />
+
+		<h:outputText value="Descrição" />
+		<h:inputTextarea columns="40" rows="3" id="campoDescricao"
+			value="#{atividadeBean.atividade.descricao}" />
+		<br />
+
+		<h:outputText value="Responsável" />
+		<h:inputText id="campoResponsavel"
+			value="#{atividadeBean.atividade.responsavel}" />
+		<br />
+
+		<h:outputText value="Prioridade" />
+		<h:inputText id="campoPrioridade"
+			value="#{atividadeBean.atividade.prioridade}" />
+		<br />
+
+		<h:commandButton value="Cadastrar/Atualizar atividade"
+			action="#{atividadeBean.salvar}" />
+
+		<h:commandButton value="Limpar campos" action="#{atividadeBean.novo}" />
+
+	</h:form>
+
+	<h:form id="formExibirAtividade">
+		<h:dataTable value="#{atividadeBean.atividades}" var="atividade">
+			<h:column>
+				<h:outputText value="#{atividade.id}"></h:outputText>
+			</h:column>
+			<h:column>
+				<h:outputText value="#{atividade.titulo}"></h:outputText>
+			</h:column>
+			<h:column>
+				<h:outputText value="#{atividade.descricao}"></h:outputText>
+			</h:column>
+			<h:column>
+				<h:outputText value="#{atividade.responsavel}"></h:outputText>
+			</h:column>
+			<h:column>
+				<h:outputText value="#{atividade.prioridade}"></h:outputText>
+			</h:column>
+			<h:column>
+				<h:commandLink value="Editar">
+					<f:setPropertyActionListener value="#{atividade}"
+						target="#{atividadeBean.atividade}" />
+				</h:commandLink>
+			</h:column>
+			<h:column>
+				<h:commandLink value="Remover" action="#{atividadeBean.remover}">
+				<f:setPropertyActionListener value="#{atividade}"
+						target="#{atividadeBean.atividade}" />
+				</h:commandLink>
+			</h:column>
+		</h:dataTable>
+	</h:form>
+
+</h:body>
+</html>

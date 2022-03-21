@@ -2,88 +2,82 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html">
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:b="http://bootsfaces.net/ui">
 
 <h:head>
 	<title>ESIG - Cadastro de atividades</title>
 </h:head>
 
-<h:body>
+<h:body style="margin:10px;">
 	<h:form id="formCadastrarAtividade">
-
+		<h:messages infoStyle="color:red"/>
+		<br />
 		<h:panelGrid columns="2">
 
-			<f:facet name="header">
-				<h:outputText value="Cadastro de atividade"></h:outputText>
-			</f:facet>
 			<h:outputText value="ID" />
-			<h:inputText id="campoID" value="#{atividadeBean.atividade.id}"
+			<b:inputText id="campoID" value="#{atividadeBean.atividade.id}"
 				readonly="true" />
 
 			<h:outputText value="Título" />
-			<h:inputText id="campoTitulo"
+			<b:inputText id="campoTitulo"
 				value="#{atividadeBean.atividade.titulo}" />
 
 			<h:outputText value="Descrição" />
-			<h:inputTextarea columns="40" rows="3" id="campoDescricao"
+			<b:inputTextarea columns="40" rows="3" id="campoDescricao"
 				value="#{atividadeBean.atividade.descricao}" />
 
 			<h:outputText value="Responsável" />
-			<h:inputText id="campoResponsavel"
+			<b:inputText id="campoResponsavel"
 				value="#{atividadeBean.atividade.responsavel}" />
 
 			<h:outputText value="Prioridade" />
-			<h:inputText id="campoPrioridade"
+			<b:inputText id="campoPrioridade"
 				value="#{atividadeBean.atividade.prioridade}" />
 				
 			<h:outputText value="Deadline" />
-			<h:inputText id="campoDeadline" value="#{atividadeBean.atividade.deadline}">
-				<f:convertDateTime pattern="dd/MM/yyyy"></f:convertDateTime>
-			</h:inputText>
+			<b:inputText id="campoDeadline" value="#{atividadeBean.atividade.deadline}" converterMessage="Data em formato inválido: deve obedecer dia/mês/ano">
+				<f:convertDateTime pattern="dd/MM/yyyy" locale="pt_BR" timeZone="GMT-03:00"></f:convertDateTime>
+			</b:inputText>
 			
 
-			<h:commandButton value="Cadastrar/Atualizar atividade"
+			<b:commandButton value="Cadastrar/Atualizar atividade"
 				action="#{atividadeBean.salvar}" />
 
-			<h:commandButton value="Novo registro" action="#{atividadeBean.novo}" />
+			<b:commandButton value="Novo registro" action="#{atividadeBean.novo}" />
 
 		</h:panelGrid>
-
 	</h:form>
+	<br />
+	<b:form id="formExibirAtividade">
 
-	<h:form id="formExibirAtividade">
+		<b:dataTable value="#{atividadeBean.atividades}" var="atividade" cellpadding="3" caprion="Lista de atividades">
 
-		<h:dataTable value="#{atividadeBean.atividades}" var="atividade" cellpadding="3">
-
-			<f:facet name="header">
-				<h:outputText value="Lista de atividades"></h:outputText>
-			</f:facet>
-
-			<h:column>
+			<b:dataTableColumn>
 				<f:facet name="header">ID</f:facet>
 				<h:outputText value="#{atividade.id}"></h:outputText>
-			</h:column>
-			<h:column>
+			</b:dataTableColumn>
+			<b:dataTableColumn>
 				<f:facet name="header">Título</f:facet>
 				<h:outputText value="#{atividade.titulo}"></h:outputText>
-			</h:column>
-			<h:column>
+			</b:dataTableColumn>
+			<b:dataTableColumn>
 				<f:facet name="header">Descrição</f:facet>
 				<h:outputText value="#{atividade.descricao}"></h:outputText>
-			</h:column>
-			<h:column>
+			</b:dataTableColumn>
+			<b:dataTableColumn>
 				<f:facet name="header">Responsável</f:facet>
 				<h:outputText value="#{atividade.responsavel}"></h:outputText>
-			</h:column>
-			<h:column>
+			</b:dataTableColumn>
+			<b:dataTableColumn>
 				<f:facet name="header">Prioridade</f:facet>
 				<h:outputText value="#{atividade.prioridade}"></h:outputText>
-			</h:column>
-			<h:column>
+			</b:dataTableColumn>
+			<b:dataTableColumn>
 				<f:facet name="header">Deadline</f:facet>
 				<h:outputText value="#{atividade.deadline}"></h:outputText>
-			</h:column>
-			<h:column>
+			</b:dataTableColumn>
+			<b:dataTableColumn>
 				<f:facet name="header">Ação</f:facet>
 				<h:commandLink value="Editar">
 					<f:setPropertyActionListener value="#{atividade}"
@@ -94,9 +88,9 @@
 					<f:setPropertyActionListener value="#{atividade}"
 						target="#{atividadeBean.atividade}" />
 				</h:commandLink>
-			</h:column>
-		</h:dataTable>
-	</h:form>
+			</b:dataTableColumn>
+		</b:dataTable>
+	</b:form>
 
 </h:body>
 </html>
